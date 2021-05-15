@@ -16,6 +16,7 @@ import us.rjks.utils.Type;
 public class GameManager {
 
     private MapManager.Map currentMap;
+    private MapManager.Map forcemap;
     private Counter mapchange;
     private boolean setup;
 
@@ -31,8 +32,16 @@ public class GameManager {
         return mapchange;
     }
 
+    public MapManager.Map getForcemap() {
+        return forcemap;
+    }
+
     public boolean isSetup() {
         return setup;
+    }
+
+    public void setForcemap(MapManager.Map forcemap) {
+        this.forcemap = forcemap;
     }
 
     public void setSetup(boolean setup) {
