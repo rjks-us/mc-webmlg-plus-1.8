@@ -28,6 +28,7 @@ public class Death implements Listener {
         event.setDeathMessage(null);
         event.getDrops().clear();
 
+        Main.getGame().falling.remove(event.getEntity().getPlayer());
         respawn(event.getEntity());
     }
 
@@ -39,7 +40,6 @@ public class Death implements Listener {
                 @Override
                 public void run() {
                     event.getPlayer().getInventory().clear();
-                    Main.getGame().falling.remove(event.getPlayer());
                     Main.getGame().getInventory().setInv(event.getPlayer());
                     Main.getGame().getCurrentMap().teleportPlayerToRandomLocationCollection(event.getPlayer(), "spawn");
                 }

@@ -30,94 +30,109 @@ public class Build implements Listener {
 
     @EventHandler
     public void onBlockEvent(@Nonnull BlockFromToEvent event) {
+        if (Main.getGame().isSetup()) return;
+
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onWeatherChange(@Nonnull WeatherChangeEvent event) {
+        if (Main.getGame().isSetup()) return;
+
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onHunger(@Nonnull FoodLevelChangeEvent event) {
+        if (Main.getGame().isSetup()) return;
+
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onEntityExplodeEvent(@Nonnull EntityExplodeEvent event) {
+        if (Main.getGame().isSetup()) return;
+
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onEntityExplodeEvent(@Nonnull EntitySpawnEvent event) {
+        if (Main.getGame().isSetup()) return;
+
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onLeavesDecayEvent(@Nonnull LeavesDecayEvent event) {
+        if (Main.getGame().isSetup()) return;
+
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onLeavesDecayEvent(@Nonnull BlockGrowEvent event) {
+        if (Main.getGame().isSetup()) return;
+
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onAchievment(@Nonnull PlayerAchievementAwardedEvent event) {
+        if (Main.getGame().isSetup()) return;
+
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onPhysics(@Nonnull BlockPhysicsEvent event) {
+        if (Main.getGame().isSetup()) return;
         event.setCancelled(true);
     }
 
     @EventHandler
     public void onPlace(BlockPlaceEvent event) {
-        if(!event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
-            if(!Main.getGame().falling.contains(event.getPlayer())) {
-                event.setCancelled(true);
-            } else {
-                Main.getGame().falling.remove(event.getPlayer());
-                event.getPlayer().getInventory().clear();
-                Main.getGame().getInventory().setInv(event.getPlayer());
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-                    @Override
-                    public void run() {
-                        if(Bukkit.getWorlds().contains(event.getBlock().getWorld())) {
-                            event.getBlock().setType(Material.AIR);
-                        }
+        if (Main.getGame().isSetup()) return;
+
+        if(!Main.getGame().falling.contains(event.getPlayer())) {
+            event.setCancelled(true);
+        } else {
+            Main.getGame().falling.remove(event.getPlayer());
+            event.getPlayer().getInventory().clear();
+            Main.getGame().getInventory().setInv(event.getPlayer());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+                @Override
+                public void run() {
+                    if(Bukkit.getWorlds().contains(event.getBlock().getWorld())) {
+                        event.getBlock().setType(Material.AIR);
                     }
-                }, Config.getInteger("block-duration-until-disapear") * 20);
-            }
+                }
+            }, Config.getInteger("block-duration-until-disapear") * 20);
         }
     }
 
     @EventHandler
     public void onBucketEmpty (PlayerBucketEmptyEvent event) {
         if (Main.getGame().isSetup()) return;
-        if(!event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
-            if (event.getBucket() != Material.WATER_BUCKET) return;
+        if (event.getBucket() != Material.WATER_BUCKET) return;
 
-            if(!Main.getGame().falling.contains(event.getPlayer())) {
-                event.setCancelled(true);
-                event.getBlockClicked().getRelative(event.getBlockFace()).setType(Material.AIR);
-            } else {
-                Main.getGame().falling.remove(event.getPlayer());
-                event.getPlayer().getInventory().clear();
-                Main.getGame().getInventory().setInv(event.getPlayer());
+        if(!Main.getGame().falling.contains(event.getPlayer())) {
+            event.setCancelled(true);
+            event.getBlockClicked().getRelative(event.getBlockFace()).setType(Material.AIR);
+        } else {
+            Main.getGame().falling.remove(event.getPlayer());
+            event.getPlayer().getInventory().clear();
+            Main.getGame().getInventory().setInv(event.getPlayer());
 
-                Block water = event.getBlockClicked().getRelative(event.getBlockFace());
-                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
-                    @Override
-                    public void run() {
-                        if(Bukkit.getWorlds().contains(water.getWorld())) {
-                            water.setType(Material.AIR);
-                        }
+            Block water = event.getBlockClicked().getRelative(event.getBlockFace());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getPlugin(), new Runnable() {
+                @Override
+                public void run() {
+                    if(Bukkit.getWorlds().contains(water.getWorld())) {
+                        water.setType(Material.AIR);
                     }
-                }, Config.getInteger("block-duration-until-disapear") * 20);
-            }
+                }
+            }, Config.getInteger("block-duration-until-disapear") * 20);
         }
     }
 
