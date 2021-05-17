@@ -61,12 +61,12 @@ public class Up implements CommandExecutor {
                         loc.setX(x + 0.5);
                         loc.setZ(z + 0.5);
                         loc.setY(height);
-                        sender.sendMessage("You are now at " + x + " " + height + "" + z);
 
                         Block block = ((Player) sender).getWorld().getBlockAt(x, height - 1, z);
                         block.setType(Material.valueOf(Config.getString("block-material-from-jump")));
                         ((Player) sender).teleport(loc);
                         Main.getGame().falling.add(((Player) sender));
+                        ((Player) sender).setFallDistance(0);
 
                         Config.getItemStackList("mlg-items").forEach(itemStack -> {
                             for (ItemStack content : ((Player) sender).getInventory().getContents()) {
