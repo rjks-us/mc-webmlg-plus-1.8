@@ -8,11 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import us.rjks.cmd.Forcemap;
 import us.rjks.cmd.Map;
 import us.rjks.cmd.Skip;
-import us.rjks.db.MySQL;
-import us.rjks.listener.Chat;
-import us.rjks.listener.CountDown;
-import us.rjks.listener.Join;
-import us.rjks.listener.Quit;
+import us.rjks.cmd.Up;
+import us.rjks.listener.*;
 import us.rjks.utils.*;
 
 import java.awt.*;
@@ -68,11 +65,6 @@ public class Main extends JavaPlugin {
             return;
         }
 
-        if (Config.getBoolean("database")) {
-            MySQL.connect();
-            MySQL.createTable();
-        }
-
         loadListeners();
 
         if(MapManager.getSetUpMap().size() == 0) {
@@ -84,7 +76,10 @@ public class Main extends JavaPlugin {
             map.loadMap();
             game.setCurrentMap(map);
             System.out.println("[MAP] Loaded " + map.getName() + " as default");
-            getGame().getMapchange().start();
+
+            if(Config.getBoolean("map-change-counter-enabled")) {
+                getGame().getMapchange().start();
+            }
 
             Bukkit.getOnlinePlayers().forEach(player -> {
                 player.teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
@@ -157,11 +152,18 @@ public class Main extends JavaPlugin {
     public void loadListeners() {
         getCommand("map").setExecutor(new Map());
         getCommand("skip").setExecutor(new Skip());
+        getCommand("up").setExecutor(new Up());
         getCommand("forcemap").setExecutor(new Forcemap());
+
+        if (Main.getGame().isSetup()) return;
 
         Bukkit.getPluginManager().registerEvents(new Join(), this);
         Bukkit.getPluginManager().registerEvents(new Quit(), this);
+        Bukkit.getPluginManager().registerEvents(new Interact(), this);
+        Bukkit.getPluginManager().registerEvents(new Death(), this);
         Bukkit.getPluginManager().registerEvents(new Chat(), this);
+        Bukkit.getPluginManager().registerEvents(new Damage(), this);
+        Bukkit.getPluginManager().registerEvents(new Build(), this);
         Bukkit.getPluginManager().registerEvents(new CountDown(), this);
     }
 

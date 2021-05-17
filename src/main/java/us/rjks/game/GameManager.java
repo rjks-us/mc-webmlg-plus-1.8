@@ -1,9 +1,9 @@
 package us.rjks.game;
 
-import us.rjks.utils.Config;
-import us.rjks.utils.Counter;
-import us.rjks.utils.MapManager;
-import us.rjks.utils.Type;
+import org.bukkit.entity.Player;
+import us.rjks.utils.*;
+
+import java.util.ArrayList;
 
 /***************************************************************************
  *
@@ -17,11 +17,16 @@ public class GameManager {
 
     private MapManager.Map currentMap;
     private MapManager.Map forcemap;
+    private ScoreBoard scoreBoard;
     private Counter mapchange;
+    private Inventory inventory;
+    public ArrayList<Player> falling = new ArrayList<>();
     private boolean setup;
 
     public GameManager() {
         mapchange = new Counter(Type.MAP, Config.getInteger("map-change-counter"));
+        scoreBoard = new ScoreBoard();
+        inventory = new Inventory();
     }
 
     public MapManager.Map getCurrentMap() {
@@ -34,6 +39,14 @@ public class GameManager {
 
     public MapManager.Map getForcemap() {
         return forcemap;
+    }
+
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
     }
 
     public boolean isSetup() {

@@ -21,7 +21,7 @@ public class Forcemap implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command label, String s, String[] args) {
-
+        if (Main.getGame().isSetup()) return false;
         if(sender instanceof Player) {
             if(sender.hasPermission(Config.getString("permissions.forcemap"))) {
                 if (Main.getGame().getForcemap() == null) {

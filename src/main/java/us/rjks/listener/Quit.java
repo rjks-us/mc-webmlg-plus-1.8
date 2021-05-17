@@ -23,6 +23,10 @@ public class Quit implements Listener {
         if (Config.getBoolean("enable-rank-system") && Config.getBoolean("enable-tab-rank")) {
             TabList.cache.remove(event.getPlayer());
         }
+
+        if (Config.getBoolean("enable-rank-system") && Config.getBoolean("enable-tab-rank")) {
+            TabList.cache.remove(event.getPlayer());
+        }
     }
 
 }

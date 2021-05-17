@@ -5,10 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import us.rjks.game.GameManager;
 import us.rjks.game.Main;
-import us.rjks.utils.Config;
-import us.rjks.utils.MapManager;
-import us.rjks.utils.ScoreBoard;
-import us.rjks.utils.TabList;
+import us.rjks.utils.*;
 
 /***************************************************************************
  *
@@ -26,12 +23,18 @@ public class Join implements Listener {
             TabList.setTabList(event.getPlayer());
         }
 
+        if(Config.getBoolean("enable-player-joins-message")) {
+            event.setJoinMessage(Messages.getString("player-joins-message").replaceAll("%player%", event.getPlayer().getName()));
+        }
+
+        event.getPlayer().sendMessage(Messages.getString("join-welcome-message").replaceAll("%player%", event.getPlayer().getName()));
+
         if(Config.getBoolean("show-score-board")) {
-            ScoreBoard.setScoreBoard(event.getPlayer());
+            Main.getGame().getScoreBoard().setScoreBoard(event.getPlayer());
         }
 
         if (Main.getGame().getCurrentMap() != null) {
-            System.out.println(Main.getGame().getCurrentMap().getAmountOfSpawnCollection("spawn"));
+            Main.getGame().getInventory().setInv(event.getPlayer());
             event.getPlayer().teleport(Main.getGame().getCurrentMap().getRandomLocationCollection("spawn"));
         }
 

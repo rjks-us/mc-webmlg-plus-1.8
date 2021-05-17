@@ -2,48 +2,37 @@
 ## You need help with setting up the Plugin? Check out my Discord: https://link.rjks.us/support
 
 enabled: false
-database: false
-
-## Database Structure
-
-mysql:
-  user: 'root'
-  password: ''
-  host: 'localhost'
-  database: 'game'
-  port: '3306'
-
-## Here you can plug in your own coin system if you have one, just user the same database
-## and define your uuid row and coins row and the plugin will use your coin System
-## NOTICE: ONCE DEFINED, WE DO NOT RECOMMEND CHANGING THESE VALUES!
-
-coins:
-  table: 'game_coins'
-  uuid-row: 'uuid'
-  coins-row: 'coins'
-
-stats:
-  table: 'game_stats'
-  uuid-row: 'uuid'
-  kills-row: 'kills'
-  deaths-row: 'deaths'
 
 ## Rank System Config
 
 enable-rank-system: false
 enable-tab-rank: false
 enable-chat-rank: false
+
+## We recommend to disable this function
 display-effect-on-player: false
 display-effect-on-top-while-sneaking: false
 
 ## Ingame Config
+
+mlg-type-slot: 4
+mlg-type-switch-sound: 'CLICK'
+
+enable-player-joins-message: true
+enable-player-leaves-message: true
+
+block-material-from-jump: 'SANDSTONE'
+block-duration-until-disapear: 5
+
+min-height: 10
+max-height: 255
 
 game-action-bar-enabled: true
 show-score-board: true
 
 ## This requires a minimum of 2 maps in the cache
 map-change-counter-enabled: true
-map-change-counter: 500
+map-change-counter: 1800
 map-change-counter-allow-two-maps-in-a-row: false
 
 map-change-announcement-in-chat:
@@ -66,3 +55,17 @@ permissions:
   operator: system.game.operator
   skip: system.game.cmd.skip
   always-skip: system.game.cmd.skip.always
+
+mlg-items:
+  - ==: org.bukkit.inventory.ItemStack
+    type: WEB
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '&f&lCOBWEB'
+  - ==: org.bukkit.inventory.ItemStack
+    type: WATER_BUCKET
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: '&b&lWATER'

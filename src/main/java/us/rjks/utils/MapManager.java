@@ -87,12 +87,16 @@ public class MapManager {
     /**
      * TO MY FUTURE ME: HERE YOU CAN DEFINE THE PROPERTIES FOR A SETUP MAP
      * THIS COULD BE INCLUDING SPAWNPOINTS, COLLECTION OF SPAWNPOINTS OR PROPS
-     * failed to find this snipped counter: 1
+     * failed to find this snipped counter: 3
      * */
     public static ArrayList<Map> getSetUpMap() {
         ArrayList<Map> m = new ArrayList<>();
         maps.forEach(map -> {
-            if(map.getAmountOfSpawnCollection("spawn") > 0) {
+            if(map.getAmountOfSpawnCollection("spawn") > 0
+                    && map.getProperty("upperbound-x") != null
+                    && map.getProperty("upperbound-z") != null
+                    && map.getProperty("underbound-x") != null
+                    && map.getProperty("underbound-z") != null) {
                 m.add(map);
             }
         });

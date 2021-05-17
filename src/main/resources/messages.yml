@@ -7,48 +7,64 @@ no-player: "&cYou have to be a player to execute this command."
 ## These are the messages for setting up a map with /map
 
 map-command-syntax:
-  - "&e&lGAME &r&8\u25CF &7Overview of all Map Commands:"
+  - "&b&lWEBMLG &r&8\u25CF &7Overview of all Map Commands:"
   - " &8- &7map list"
   - " &8- &7map create [CONFIGNAME] [DISPLAYNAME]"
   - " &8- &7map delete [CONFIGNAME]"
   - " "
-  - "&e&lGAME &r&8\u25CF &eSupport&8: &7https://link.rjks.us/support"
+  - " &8- &7map setUpperBound [CONFIGNAME]"
+  - " &8- &7map setUnderBound [CONFIGNAME]"
+  - " "
+  - "&b&lWEBMLG &r&8\u25CF &eSupport&8: &7https://link.rjks.us/support"
 
-map-command-list-title: "&e&lGAME &r&8\u25CF &7Maps in cache (%amount%)"
+player-joins-message: "&b&lWEBMLG &r&8\u25CF &7Player %player% &ajoined &7WEBMLG"
+player-leaves-message: "&b&lWEBMLG &r&8\u25CF &7Player %player% &cleft &7WEBMLG"
+
+join-welcome-message: "&b&lWEBMLG &r&8\u25CF &cUse &4/up [Height] &cto get teleported"
+
+map-command-list-title: "&b&lWEBMLG &r&8\u25CF &7Maps in cache (%amount%)"
 map-command-list-item: "&8- &7NAME: %mapname% &8| &7FILE: %mapsrc%"
 
-map-command-delete-success: "&e&lGAME &r&8\u25CF &cDeleted Map %mapname% from all configs, it will still exists in the Maps Folder"
-map-command-delete-error: "&e&lGAME &r&8\u25CF &cUnable to loaded map %mapname% because map is not registered"
+map-command-delete-success: "&b&lWEBMLG &r&8\u25CF &cDeleted Map %mapname% from all configs, it will still exists in the Maps Folder"
+map-command-delete-error: "&b&lWEBMLG &r&8\u25CF &cUnable to loaded map %mapname% because map is not registered"
 
-map-command-create-success: "&e&lGAME &r&8\u25CF &aThe Map %mapname% was successfully created."
-map-command-map-not-found: "&e&lGAME &r&8\u25CF &cThe Map %mapname% was not found."
-map-command-map-already-exists: "&e&lGAME &r&8\u25CF &cThe Map %mapname% already exists"
-map-command-create-set-spawn-after: "&e&lGAME &r&8\u25CF &aPlease set the spawnpoint with &f/map setspawn [MAPNAME] spawn&a, you can also add multiple spawns by executing the same command again. The player will then be send to a random spawn"
-map-command-spawn-set: "&e&lGAME &r&8\u25CF &aYou successfully set the spawn %spawn% on map %mapname%"
+map-command-create-success: "&b&lWEBMLG &r&8\u25CF &aThe Map %mapname% was successfully created."
+map-command-map-not-found: "&b&lWEBMLG &r&8\u25CF &cThe Map %mapname% was not found."
+map-command-map-already-exists: "&b&lWEBMLG &r&8\u25CF &cThe Map %mapname% already exists"
+map-command-create-set-spawn-after: "&b&lWEBMLG &r&8\u25CF &aPlease set the spawnpoint with &f/map setspawn [MAPNAME] spawn&a, you can also add multiple spawns by executing the same command again. The player will then be send to a random spawn"
+map-command-spawn-set: "&b&lWEBMLG &r&8\u25CF &aYou successfully set the spawn %spawn% on map %mapname%"
 
-skip-command-map-skiped-successfully: "&e&lGAME &r&8\u25CF &aYou skipped the countdown"
-skip-command-map-skiped-successfully-broadcast: "&e&lGAME &r&8\u25CF &aThe Player %playername% skipped the map counter"
-skip-command-map-skiped-error: "&e&lGAME &r&8\u25CF &cThe Map is already changing"
-skip-command-map-skiped-wait-until-skip: "&e&lGAME &r&8\u25CF &cYou have to wait until you can skip"
+map-command-setupperbound-success: "&b&lWEBMLG &r&8\u25CF &aYou set the upper bound to X:%x%:Y:%z%"
+map-command-setunderbound-success: "&b&lWEBMLG &r&8\u25CF &aYou set the under bound to X:%x%:Y:%z%"
+
+skip-command-map-skiped-successfully: "&b&lWEBMLG &r&8\u25CF &aYou skipped the countdown"
+skip-command-map-skiped-successfully-broadcast: "&b&lWEBMLG &r&8\u25CF &aThe Player %playername% skipped the map counter"
+skip-command-map-skiped-error: "&b&lWEBMLG &r&8\u25CF &cThe Map is already changing"
+skip-command-map-skiped-wait-until-skip: "&b&lWEBMLG &r&8\u25CF &cYou have to wait until you can skip"
+
+up-command-syntax: "&b&lWEBMLG &r&8\u25CF &cUse: /up [height]"
+up-command-range-of-heights: "&b&lWEBMLG &r&8\u25CF &cYou have to choose a number between %low% and %height%"
+
+already-mlg: "&b&lWEBMLG &r&8\u25CF &cYou are already making an mlg"
 
 ## These are the system messages, all functions can be disabled/enabled in the config.yml
 
 ## %mapcounter% is giving back the seconds until the mapchange
-game-action-bar: "&e&lGAME &r&8\u25CF &7Map&8: &e%currentmap% &7Mapchange&8: &e%mapcounterformated%"
+game-action-bar: "&b&lWEBMLG &r&8\u25CF &7Map&8: &e%currentmap% &7Mapchange&8: &e%mapcounterformated%"
 
-map-changes-in-broadcast: "&e&lGAME &r&8\u25CF &aThe Map changes in &seconds& seconds"
+map-changes-in-broadcast: "&b&lWEBMLG &r&8\u25CF &aThe Map changes in &seconds& seconds"
 map-change-broadcast:
-  - "&e&lGAME &r&8\u25CF &7Next Map: &e%mapname% &7by &e%builder%"
+  - "&b&lWEBMLG &r&8\u25CF &7Next Map: &e%mapname% &7by &e%builder%"
 
 ## Be aware, the maximum lines of a scoreboard are > 16 < and you can not have multiple lines of the same value
 score-board-layout-title: "&6&lYOUR-SERVER.COM"
 score-board-layout:
   - "&e "
-  - "&eKills&8:"
-  - " &8\u25CF &c%kills%"
+  - "&eTeamspeak&8:"
+  - " &8\u25CF &cts.rjks.us"
   - "&a "
-  - "&eDeaths&8:"
-  - " &8\u25CF &c&c%deaths%"
+  - "&eShop&8:"
+  - " &8\u25CF &c&cshop.rjks.us"
   - "&6 "
   - "&eMap&8:"
   - " &8\u25CF &e%map%"

@@ -24,7 +24,7 @@ public class Skip implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command label, String s, String[] args) {
-
+        if (Main.getGame().isSetup()) return false;
         if(sender instanceof Player) {
             if(sender.hasPermission(Config.getString("permissions.skip"))) {
                 if(Main.getGame().getMapchange().getCountdown() < Config.getInteger("map-skip-countdown-possible-only-at-second") || (Main.getGame().getMapchange().getCountdown() > Config.getInteger("map-skip-countdown-possible-only-at-second") && sender.hasPermission(Config.getString("permissions.always-skip")))) {

@@ -53,6 +53,30 @@ public class Map implements CommandExecutor {
                         } else {
                             sender.sendMessage(Messages.getString("map-command-delete-error").replaceAll("%mapname%", args[1]));
                         }
+                    } else if (args[0].equalsIgnoreCase("setUpperBound")) {
+                        if(MapManager.getMapFromName(args[1]) != null) {
+                            MapManager.Map map = MapManager.getMapFromName(args[1]);
+                            map.setProperty("upperbound-x", ((Player) sender).getLocation().getBlockX());
+                            map.setProperty("upperbound-z", ((Player) sender).getLocation().getBlockZ());
+                            sender.sendMessage(Messages.getString("map-command-setupperbound-success")
+                                    .replaceAll("%mapname%", args[0])
+                                    .replaceAll("%x%", ((Player) sender).getLocation().getBlockX() + "")
+                                    .replaceAll("%z%", ((Player) sender).getLocation().getBlockZ() + ""));
+                        } else {
+                            sender.sendMessage(Messages.getString("map-command-delete-error").replaceAll("%mapname%", args[1]));
+                        }
+                    } else if (args[0].equalsIgnoreCase("setUnderBound")) {
+                        if(MapManager.getMapFromName(args[1]) != null) {
+                            MapManager.Map map = MapManager.getMapFromName(args[1]);
+                            map.setProperty("underbound-x", ((Player) sender).getLocation().getBlockX());
+                            map.setProperty("underbound-z", ((Player) sender).getLocation().getBlockY());
+                            sender.sendMessage(Messages.getString("map-command-setunderbound-success")
+                                    .replaceAll("%mapname%", args[0])
+                                    .replaceAll("%x%", ((Player) sender).getLocation().getBlockX() + "")
+                                    .replaceAll("%z%", ((Player) sender).getLocation().getBlockZ() + ""));
+                        } else {
+                            sender.sendMessage(Messages.getString("map-command-delete-error").replaceAll("%mapname%", args[1]));
+                        }
                     }
                     return true;
                 } else if(args.length == 3) {

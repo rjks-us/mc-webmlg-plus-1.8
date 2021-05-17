@@ -3,7 +3,6 @@ package us.rjks.utils;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import us.rjks.db.Stats;
 import us.rjks.game.GameManager;
 import us.rjks.game.Main;
 
@@ -17,7 +16,7 @@ import us.rjks.game.Main;
 
 public class ScoreBoard {
 
-    public static void setScoreBoard(Player player) {
+    public void setScoreBoard(Player player) {
 
         Scoreboard scoreboard = new Scoreboard();
         ScoreboardObjective obj = scoreboard.registerObjective("zagd", IScoreboardCriteria.b);
@@ -33,8 +32,6 @@ public class ScoreBoard {
 
         Messages.getStringList("score-board-layout").forEach(element -> {
             ScoreboardScore score = new ScoreboardScore(scoreboard, obj, element
-                    .replaceAll("%kills%", Stats.getKills(player.getUniqueId().toString()) + "")
-                    .replaceAll("%deaths%", Stats.getDeaths(player.getUniqueId().toString()) + "")
                     .replaceAll("%map%", Main.getGame().getCurrentMap().getName())
                     .replaceAll("%rank%", "0"));
 
@@ -44,7 +41,7 @@ public class ScoreBoard {
         });
     }
 
-    private static void sendPacket(Packet packet, Player p) {
+    private void sendPacket(Packet packet, Player p) {
         ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
     }
 

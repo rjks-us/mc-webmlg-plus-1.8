@@ -70,6 +70,25 @@ public class Config {
         return null;
     }
 
+    public static ArrayList<ItemStack> getItemStackList(String name) {
+        try {
+            ArrayList<ItemStack> stacks = new ArrayList<>();
+
+            ((ArrayList<ItemStack>)locscfg.get(name)).forEach(itemStack -> {
+                String display = "";
+                if(itemStack.getItemMeta() != null && itemStack.getItemMeta().getDisplayName() != null) {
+                    display = itemStack.getItemMeta().getDisplayName();
+                }
+                ItemBuilder itemBuilder = new ItemBuilder(itemStack.getType(), ChatColor.translateAlternateColorCodes('&', display));
+                stacks.add(itemBuilder.checkout());
+            });
+            return stacks;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static ArrayList<Integer> getIntegerList(String name) {
         try {
             return new ArrayList<Integer>(locscfg.getIntegerList(name));
